@@ -1,36 +1,57 @@
-import { nanoid } from 'nanoid'
 require('dotenv').config()
 
-const db = require('db')
-  db.connect({
-    _API_TOKEN: process.env.API_TOKEN,
-    _SEPA_PROVIDER_ID: process.env.SEPA_PROVIDER_ID,
-    _MERCHANT_CODE: process.env.MERCHANT_CODE
-  })
+const {
+  PAYCOMET_API_KEY, 
+  PAYCOMET_MERCHANT_CODE,
+  PAYCOMET_PROVIDER_ID,
+  PAYCOMET_SEPA_PROVIDER_ID, 
+} = process.env
 
-export const addDocument = (
-  MERCHANT_CUSTOMER_ID, 
-  MERCHANT_CUSTOMER_IBAN,
-  DOCUMENT_TYPE,
-  FILE_CONTENT
-  ) => {
-    const api = new PaycometRestApi.SepaApi()
-    const TERMINAL = nanoid()
-    const body = {
-      body: {
-        terminal: TERMINAL,
-        sepaProviderId: _SEPA_PROVIDER_ID,
-        merchantCode: _MERCHANT_CODE,
-        merchantCustomerId: MERCHANT_CUSTOMER_ID,
-        merchantCustomerIban: MERCHANT_CUSTOMER_IBAN,
-        documentType: DOCUMENT_TYPE,
-        fileContent: FILE_CONTENT,
-      }
+const BASE_URL = 'https://rest.paycomet.com'
+const HEADERS = {'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,}
+
+export const addDocument = (merchantCustomerId, merchantCustomerIban, documentType, fileContent) => axios.post(
+  `${BASE_URL}/v1/sepa/add-document`,
+  { 
+    headers: HEADERS,
+    body: {
+      terminal: PAYCOMET_PROVIDER_ID,
+      sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
+      merchantCode: PAYCOMET_MERCHANT_CODE,
+      merchantCustomerId,
+      merchantCustomerIban,
+      documentType,
+      fileContent,
     }
-    const call = (error, data) => {
-      error 
-        ? console.log(`Ups! Hemos encontrado un error: ${error}`)
-        : console.log(`Todo correcto: ${data}`)
+  }
+);
+
+export const checkCustomer = (merchantCustomerId, merchantCustomerIban, merchantCustomerType) => axios.post(
+  `${BASE_URL}/v1/sepa/check-customer`,
+  { 
+    headers: HEADERS,
+    body: {
+      terminal: PAYCOMET_PROVIDER_ID,
+      sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
+      merchantCode: PAYCOMET_MERCHANT_CODE,
+      merchantCustomerId,
+      merchantCustomerIban,
+      merchantCustomerType,
     }
-    api.addDocument(_API_TOKEN, body, call)
-}
+  }
+);
+
+export const checkDocument = (merchantCustomerId, merchantCustomerIban, documentType) => axios.post(
+  `${BASE_URL}/v1/sepa/check-document`,
+  { 
+    headers: HEADERS,
+    body: {
+      terminal: PAYCOMET_PROVIDER_ID,
+      sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
+      merchantCode: PAYCOMET_MERCHANT_CODE,
+      merchantCustomerId,
+      merchantCustomerIban,
+      documentType,
+    }
+  }
+);
