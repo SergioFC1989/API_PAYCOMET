@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node -r esm index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SergioFC1989/API_PAYCOMET.git"
   },
+  "type": "module",
   "author": "Sergio FC",
   "license": "ISC",
   "bugs": {
@@ -19,6 +21,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "jest": "^26.6.3",
     "nanoid": "^3.1.22"
   }
