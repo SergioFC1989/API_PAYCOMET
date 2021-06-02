@@ -19,7 +19,7 @@ const headersPaycomet = {
 
 const autoMerchantCustomerId = nano.nanoid()
 
-export const addDocument = ( 
+const addDocument = ( 
 merchantCustomerIban, 
 documentType, 
 fileContent
@@ -37,3 +37,4 @@ fileContent
       fileContent,
     }
   })
+exports.default = addDocument
