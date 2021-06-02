@@ -5,5 +5,5 @@ const imageBase = 'iVBORw0KGgoAAAANSUhEUgAAACQAAAAaCAIAAABQEmkSAAAAAXNSR0IArs4c6
 const merchantCustomerId = nano.nanoid()
 
 // endpoint.addDocument(merchantCustomerId,'ES9121000418450200051332',12,imageBase)
-// endpoint.checkCustomer(merchantCustomerId,'ES9121000418450200051332',1)
+endpoint.checkCustomer(merchantCustomerId,'ES9121000418450200051332',1)
 // endpoint.checkDocument('e4XV_71x0kQdG0IZ1jumU','ES9121000418450200051332',12) 

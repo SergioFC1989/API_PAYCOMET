@@ -10,6 +10,11 @@ const {
 
 const BASE_URL = 'https://rest.paycomet.com/v1'
 
+const headersPaycomet = {
+  'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
+  'Content-Type': 'application/json',
+}
+
 // Required: documentType,merchantCode,merchantCustomerIban,merchantCustomerId,sepaProviderId,terminal
 // --> Checked!
 module.exports.addDocument = (
@@ -20,10 +25,7 @@ fileContent
 ) => axios({
     method: 'POST',
     url: `${BASE_URL}/sepa/add-document`,
-    headers: {
-      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-      'Content-Type': 'application/json',
-    },
+    headers: headersPaycomet,
     data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
@@ -46,10 +48,7 @@ merchantCustomerType
 ) => axios({
     method: 'POST',
     url: `${BASE_URL}/sepa/check-customer`,
-    headers: {
-      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-      'Content-Type': 'application/json',
-    },
+    headers: headersPaycomet, 
     data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
@@ -71,10 +70,7 @@ documentType
 ) => axios({
     method: 'POST',
     url: `${BASE_URL}/sepa/check-document`,
-    headers: {
-      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-      'Content-Type': 'application/json',
-    }, 
+    headers: headersPaycomet,
     data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
@@ -103,10 +99,7 @@ operationConcept
 ) => axios({
     method: 'POST',
     url: `${BASE_URL}/sepa/operations`,
-    headers: {
-      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-      'Content-Type': 'application/json',
-    },
+    headers: headersPaycomet,
     data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
@@ -136,10 +129,7 @@ operationConcept
 module.exports.form = (order, amount,) => axios({
     method: 'POST',
     url: `${BASE_URL}/form`,
-    headers: {
-      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-      'Content-Type': 'application/json',
-    },
+    headers: headersPaycomet,
     data: {
       operationType: 1, 
       language: "es",
