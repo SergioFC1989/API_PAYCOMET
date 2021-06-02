@@ -14,23 +14,21 @@ const headersPaycomet = {
   'Content-Type': 'application/json',
 }
 
-const autoMerchantCustomerId = nano.nanoid()
-
-// Required: merchantCode,merchantCustomerIban,merchantCustomerId,merchantCustomerType,sepaProviderId,terminal
-export const checkCustomer = ( 
+const checkDocument = (
 merchantCustomerId,
 merchantCustomerIban, 
-merchantCustomerType
+documentType
 ) => axios({
     method: 'POST',
-    url: `${PAYCOMET_URL}/sepa/check-customer`,
-    headers: headersPaycomet, 
+    url: `${PAYCOMET_URL}/sepa/check-document`,
+    headers: headersPaycomet,
     data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       merchantCode: PAYCOMET_MERCHANT_CODE,
       merchantCustomerId,
       merchantCustomerIban,
-      merchantCustomerType
+      documentType,
     }
   })
+  module.exports = checkDocument

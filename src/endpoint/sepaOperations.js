@@ -15,7 +15,7 @@ const headersPaycomet = {
 }
 
 // Required: operations,sepaProviderId,terminal
-export const sepaOperations = (
+const sepaOperations = (
 operationType,
 uniqueIdCreditor,
 companyNameCreditor,
@@ -53,3 +53,5 @@ operationConcept
       ]
     }
   })
+  
+module.exports = sepaOperations

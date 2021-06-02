@@ -1,5 +1,6 @@
 require('dotenv').config()
 const axios = require('axios')
+const { default: checkDocument } = require('./checkDocument')
 
 const {
   PAYCOMET_API_KEY, 
@@ -13,21 +14,23 @@ const headersPaycomet = {
   'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
   'Content-Type': 'application/json',
 }
-
-export const checkDocument = (
+// Required: merchantCode,merchantCustomerIban,merchantCustomerId,merchantCustomerType,sepaProviderId,terminal
+const checkCustomer = ( 
 merchantCustomerId,
 merchantCustomerIban, 
-documentType
+merchantCustomerType
 ) => axios({
     method: 'POST',
-    url: `${PAYCOMET_URL}/sepa/check-document`,
-    headers: headersPaycomet,
+    url: `${PAYCOMET_URL}/sepa/check-customer`,
+    headers: headersPaycomet, 
     data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       merchantCode: PAYCOMET_MERCHANT_CODE,
       merchantCustomerId,
       merchantCustomerIban,
-      documentType,
+      merchantCustomerType
     }
   })
+
+module.exports = checkCustomer

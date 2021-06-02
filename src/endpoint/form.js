@@ -12,7 +12,7 @@ const headersPaycomet = {
   'Content-Type': 'application/json',
 }
 
-export const form = (order, amount,) => axios({
+const form = (order, amount,) => axios({
   method: 'POST',
   url: `${PAYCOMET_URL}/form`,
   headers: headersPaycomet,
@@ -30,3 +30,5 @@ export const form = (order, amount,) => axios({
     }
   }
 })
+
+module.exports = form

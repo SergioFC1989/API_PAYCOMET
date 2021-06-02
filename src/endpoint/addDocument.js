@@ -2,7 +2,6 @@
 
 require('dotenv').config()
 const axios = require('axios')
-const nano = require('nanoid')
 
 const {
   PAYCOMET_API_KEY, 
@@ -17,9 +16,8 @@ const headersPaycomet = {
   'Content-Type': 'application/json',
 }
 
-const autoMerchantCustomerId = nano.nanoid()
-
-export const addDocument = ( 
+const addDocument = ( 
+merchantCustomerId,
 merchantCustomerIban, 
 documentType, 
 fileContent
@@ -31,9 +29,10 @@ fileContent
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       merchantCode: PAYCOMET_MERCHANT_CODE,
-      merchantCustomerId: autoMerchantCustomerId,
+      merchantCustomerId,
       merchantCustomerIban,
       documentType,
       fileContent,
     }
   })
+  module.exports = addDocument
