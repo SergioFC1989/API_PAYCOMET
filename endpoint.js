@@ -11,16 +11,20 @@ const {
 const BASE_URL = 'https://rest.paycomet.com/v1'
 
 // Required: documentType,merchantCode,merchantCustomerIban,merchantCustomerId,sepaProviderId,terminal
+// --> Checked!
 module.exports.addDocument = (
 merchantCustomerId, 
 merchantCustomerIban, 
 documentType, 
 fileContent
-) => axios.post(
-  `${BASE_URL}/sepa/add-document`,
-  { 
-    'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-    body: {
+) => axios({
+    method: 'POST',
+    url: `${BASE_URL}/sepa/add-document`,
+    headers: {
+      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
+      'Content-Type': 'application/json',
+    },
+    data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       merchantCode: PAYCOMET_MERCHANT_CODE,
@@ -29,39 +33,49 @@ fileContent
       documentType,
       fileContent,
     }
-  }
-);
+  })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
 // Required: merchantCode,merchantCustomerIban,merchantCustomerId,merchantCustomerType,sepaProviderId,terminal
-const checkCustomer = (
+// --> Checked!
+module.exports.checkCustomer = (
 merchantCustomerId, 
 merchantCustomerIban, 
 merchantCustomerType
-) => axios.post(
-  `${BASE_URL}/sepa/check-customer`,
-  { 
-    'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-    body: {
+) => axios({
+    method: 'POST',
+    url: `${BASE_URL}/sepa/check-customer`,
+    headers: {
+      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
+      'Content-Type': 'application/json',
+    },
+    data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       merchantCode: PAYCOMET_MERCHANT_CODE,
       merchantCustomerId,
       merchantCustomerIban,
-      merchantCustomerType,
+      merchantCustomerType
     }
-  }
-);
+  })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
 // Required: documentType,merchantCode,merchantCustomerIban,merchantCustomerId,sepaProviderId,terminal
-const checkDocument = (
+// --> Checked!
+module.exports.checkDocument = (
 merchantCustomerId, 
 merchantCustomerIban, 
 documentType
-) => axios.post(
-  `${BASE_URL}/sepa/check-document`,
-  { 
-    'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-    body: {
+) => axios({
+    method: 'POST',
+    url: `${BASE_URL}/sepa/check-document`,
+    headers: {
+      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
+      'Content-Type': 'application/json',
+    }, 
+    data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       merchantCode: PAYCOMET_MERCHANT_CODE,
@@ -69,11 +83,12 @@ documentType
       merchantCustomerIban,
       documentType,
     }
-  }
-);
+  })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
 // Required: operations,sepaProviderId,terminal
-const sepaOperations = (
+module.exports.sepaOperations = (
 operationType,
 uniqueIdCreditor,
 companyNameCreditor,
@@ -85,11 +100,14 @@ operationAmount,
 operationCurrency,
 operationDatetime,
 operationConcept
-) => axios.post(
-  `${BASE_URL}/sepa/operations`,
-  { 
-    'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-    body: {
+) => axios({
+    method: 'POST',
+    url: `${BASE_URL}/sepa/operations`,
+    headers: {
+      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
+      'Content-Type': 'application/json',
+    },
+    data: {
       terminal: PAYCOMET_TERMINAL_ID,
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       operations: [
@@ -110,15 +128,19 @@ operationConcept
         }
       ]
     }
-  }
-);
+  })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
 // Required: operationType
-const form = (order, amount,) => axios.post(
-  `${BASE_URL}/form`,
-  { 
-    'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
-    body: {
+module.exports.form = (order, amount,) => axios({
+    method: 'POST',
+    url: `${BASE_URL}/form`,
+    headers: {
+      'PAYCOMET-API-TOKEN': PAYCOMET_API_KEY,
+      'Content-Type': 'application/json',
+    },
+    data: {
       operationType: 1, 
       language: "es",
       payment: {
@@ -131,5 +153,6 @@ const form = (order, amount,) => axios.post(
         secure: 1
       }
     }
-  }
-);
+  })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
