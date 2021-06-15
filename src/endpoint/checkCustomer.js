@@ -1,6 +1,5 @@
 require('dotenv').config()
 const axios = require('axios')
-const { default: checkDocument } = require('./checkDocument')
 
 const {
   PAYCOMET_API_KEY, 

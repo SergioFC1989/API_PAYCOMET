@@ -14,7 +14,7 @@ const headersPaycomet = {
 
 const productBalance = () => axios({
   method: 'POST',
-  url: `${PAYCOMET_URL}/v1/balance`,
+  url: `${PAYCOMET_URL}/balance`,
   headers: headersPaycomet,
   data: {
     terminal: PAYCOMET_TERMINAL_ID

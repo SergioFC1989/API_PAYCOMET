@@ -20,6 +20,7 @@
   "homepage": "https://github.com/SergioFC1989/API_PAYCOMET#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "date-and-time": "^1.0.1",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "nanoid": "^3.1.22"

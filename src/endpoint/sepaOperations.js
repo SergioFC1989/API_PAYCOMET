@@ -1,5 +1,6 @@
 require('dotenv').config()
 const axios = require('axios')
+const date = require('date-and-time');
 
 const {
   PAYCOMET_API_KEY, 
@@ -14,9 +15,16 @@ const headersPaycomet = {
   'Content-Type': 'application/json',
 }
 
+// Always one day more in the current date
+const fecha = () => {
+  const now = new Date()
+  let addDay = date.addDays(now, 1)
+  let updateDay = date.format(addDay, 'DD') 
+  return date.format(now, `YYYYMM${updateDay}`)
+}
+
 // Required: operations,sepaProviderId,terminal
 const sepaOperations = (
-operationType,
 uniqueIdCreditor,
 companyNameCreditor,
 ibanNumberCreditor,
@@ -24,8 +32,6 @@ swiftCodeCreditor,
 companyTypeCreditor,
 operationOrder,
 operationAmount,
-operationCurrency,
-operationDatetime,
 operationConcept
 ) => axios({
     method: 'POST',
@@ -36,9 +42,9 @@ operationConcept
       sepaProviderId: PAYCOMET_SEPA_PROVIDER_ID,
       operations: [
         {
+          operationType: 2,
           merchantCode: PAYCOMET_MERCHANT_CODE,
           terminalIDDebtor: PAYCOMET_TERMINAL_ID,
-          operationType,
           uniqueIdCreditor,
           companyNameCreditor,
           ibanNumberCreditor,
@@ -46,8 +52,8 @@ operationConcept
           companyTypeCreditor,
           operationOrder,
           operationAmount,
-          operationCurrency,
-          operationDatetime,
+          operationCurrency: "EUR",
+          operationDatetime: fecha(),
           operationConcept,
         }
       ]
