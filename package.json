@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "node -r esm lib/index.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
